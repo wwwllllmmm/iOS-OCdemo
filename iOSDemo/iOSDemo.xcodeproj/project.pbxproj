@@ -11,14 +11,15 @@
 		00D7E6982444157300039BA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D7E6972444157300039BA7 /* ViewController.m */; };
 		00D7E69D2444157500039BA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00D7E69C2444157500039BA7 /* Assets.xcassets */; };
 		00D7E6A32444157500039BA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D7E6A22444157500039BA7 /* main.m */; };
+		2B551A0E2C3EA73400715C71 /* VideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B551A0D2C3EA73400715C71 /* VideoCollectionViewCell.m */; };
 		2B87A19F2C3BD510003FB600 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A19E2C3BD510003FB600 /* FirstViewController.m */; };
 		2B87A1A32C3BD5E1003FB600 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A1A22C3BD5E1003FB600 /* SecondViewController.m */; };
 		2B87A1A82C3BE693003FB600 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A1A72C3BE693003FB600 /* ThirdViewController.m */; };
 		2B87A1AB2C3BE6BD003FB600 /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A1AA2C3BE6BD003FB600 /* FourthViewController.m */; };
 		2B87A1AF2C3BE6E0003FB600 /* FifthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A1AE2C3BE6E0003FB600 /* FifthViewController.m */; };
 		2B87A1B32C3C1012003FB600 /* LanchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B87A1B22C3C1012003FB600 /* LanchScreen.storyboard */; };
-		2B87A1B62C3CD778003FB600 /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A1B52C3CD778003FB600 /* MallViewController.m */; };
-		2B87A1BB2C3CD7EF003FB600 /* RecommandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A1BA2C3CD7EF003FB600 /* RecommandViewController.m */; };
+		2B87A1B62C3CD778003FB600 /* MallViewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A1B52C3CD778003FB600 /* MallViewCollectionViewCell.m */; };
+		2B87A1BB2C3CD7EF003FB600 /* RecommandCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B87A1BA2C3CD7EF003FB600 /* RecommandCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		00D7E69C2444157500039BA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00D7E6A12444157500039BA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00D7E6A22444157500039BA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2B551A0D2C3EA73400715C71 /* VideoCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCollectionViewCell.m; sourceTree = "<group>"; };
+		2B551A0F2C3EA73C00715C71 /* VideoCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCollectionViewCell.h; sourceTree = "<group>"; };
 		2B87A19E2C3BD510003FB600 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		2B87A1A02C3BD523003FB600 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		2B87A1A12C3BD5CC003FB600 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
@@ -41,10 +44,10 @@
 		2B87A1AE2C3BE6E0003FB600 /* FifthViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FifthViewController.m; sourceTree = "<group>"; };
 		2B87A1B02C3BE6E8003FB600 /* FifthViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FifthViewController.h; sourceTree = "<group>"; };
 		2B87A1B22C3C1012003FB600 /* LanchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LanchScreen.storyboard; sourceTree = "<group>"; };
-		2B87A1B52C3CD778003FB600 /* MallViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallViewController.m; sourceTree = "<group>"; };
-		2B87A1B72C3CD785003FB600 /* MallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallViewController.h; sourceTree = "<group>"; };
-		2B87A1B92C3CD7E5003FB600 /* RecommandViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommandViewController.h; sourceTree = "<group>"; };
-		2B87A1BA2C3CD7EF003FB600 /* RecommandViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommandViewController.m; sourceTree = "<group>"; };
+		2B87A1B52C3CD778003FB600 /* MallViewCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallViewCollectionViewCell.m; sourceTree = "<group>"; };
+		2B87A1B72C3CD785003FB600 /* MallViewCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallViewCollectionViewCell.h; sourceTree = "<group>"; };
+		2B87A1B92C3CD7E5003FB600 /* RecommandCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommandCollectionViewCell.h; sourceTree = "<group>"; };
+		2B87A1BA2C3CD7EF003FB600 /* RecommandCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommandCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +116,8 @@
 		2B87A1B42C3CD75A003FB600 /* MallView */ = {
 			isa = PBXGroup;
 			children = (
-				2B87A1B72C3CD785003FB600 /* MallViewController.h */,
-				2B87A1B52C3CD778003FB600 /* MallViewController.m */,
+				2B87A1B72C3CD785003FB600 /* MallViewCollectionViewCell.h */,
+				2B87A1B52C3CD778003FB600 /* MallViewCollectionViewCell.m */,
 			);
 			path = MallView;
 			sourceTree = "<group>";
@@ -122,8 +125,10 @@
 		2B87A1B82C3CD7AB003FB600 /* Recommand */ = {
 			isa = PBXGroup;
 			children = (
-				2B87A1B92C3CD7E5003FB600 /* RecommandViewController.h */,
-				2B87A1BA2C3CD7EF003FB600 /* RecommandViewController.m */,
+				2B87A1B92C3CD7E5003FB600 /* RecommandCollectionViewCell.h */,
+				2B87A1BA2C3CD7EF003FB600 /* RecommandCollectionViewCell.m */,
+				2B551A0F2C3EA73C00715C71 /* VideoCollectionViewCell.h */,
+				2B551A0D2C3EA73400715C71 /* VideoCollectionViewCell.m */,
 			);
 			path = Recommand;
 			sourceTree = "<group>";
@@ -218,9 +223,10 @@
 				2B87A1AF2C3BE6E0003FB600 /* FifthViewController.m in Sources */,
 				00D7E6922444157300039BA7 /* AppDelegate.m in Sources */,
 				2B87A19F2C3BD510003FB600 /* FirstViewController.m in Sources */,
-				2B87A1BB2C3CD7EF003FB600 /* RecommandViewController.m in Sources */,
+				2B551A0E2C3EA73400715C71 /* VideoCollectionViewCell.m in Sources */,
+				2B87A1BB2C3CD7EF003FB600 /* RecommandCollectionViewCell.m in Sources */,
 				2B87A1A32C3BD5E1003FB600 /* SecondViewController.m in Sources */,
-				2B87A1B62C3CD778003FB600 /* MallViewController.m in Sources */,
+				2B87A1B62C3CD778003FB600 /* MallViewCollectionViewCell.m in Sources */,
 				2B87A1A82C3BE693003FB600 /* ThirdViewController.m in Sources */,
 				00D7E6A32444157500039BA7 /* main.m in Sources */,
 			);

@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeAll;
 
     self.tabBarController = [[UITabBarController alloc] init];
     

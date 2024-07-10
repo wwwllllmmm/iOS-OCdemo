@@ -7,8 +7,8 @@
 //
 
 #import "FirstViewController.h"
-#import "Recommand/RecommandViewController.h"
-#import "MallView/MallViewController.h"
+#import "Recommand/RecommandCollectionViewCell.h"
+#import "MallView/MallViewCollectionViewCell.h"
 
 @interface FirstViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -16,6 +16,9 @@
 @property (nonatomic, strong) UICollectionView *contentCollectionView;
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) UIView *indicatorView;
+@property (nonatomic, strong) NSIndexPath *initialIndexPath;
+
+@property (nonatomic, strong) NSArray<NSArray<NSURL *> *> *videoURLGroups;
 
 @end
 
@@ -33,6 +36,21 @@
     [self setupButtonCollectionView];
     [self setupContentCollectionView];
     [self setupIndicatorView];
+    self.initialIndexPath = [NSIndexPath indexPathForItem:3 inSection:0];
+    
+    self.videoURLGroups = @[
+            @[
+                [NSURL URLWithString:@"https://www.youtube.com/watch?v=nprLhDi297w"],
+                [NSURL URLWithString:@"https://www.youtube.com/watch?v=nprLhDi297w"]
+            ],
+            @[
+                [NSURL URLWithString:@"https://www.youtube.com/watch?v=FwNLo_kAUZA"],
+                [NSURL URLWithString:@"https://www.youtube.com/watch?v=FwNLo_kAUZA"]
+            ],
+            // 添加更多视频URL数组
+        ];
+    
+    
 }
 
 - (void)setupButtonCollectionView {
@@ -40,12 +58,12 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
-    self.buttonCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, 50) collectionViewLayout:layout];
-//    self.buttonCollectionView.backgroundColor = [UIColor redColor];
+    self.buttonCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 80, self.view.bounds.size.width, 50) collectionViewLayout:layout];
     self.buttonCollectionView.delegate = self;
     self.buttonCollectionView.dataSource = self;
-    self.buttonCollectionView.showsHorizontalScrollIndicator = NO;
     [self.buttonCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"ButtonCell"];
+    [self.buttonCollectionView selectItemAtIndexPath:self.initialIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+
     [self.view addSubview:self.buttonCollectionView];
 }
 
@@ -60,14 +78,19 @@
     self.contentCollectionView.pagingEnabled = YES;
     self.contentCollectionView.delegate = self;
     self.contentCollectionView.dataSource = self;
-    [self.contentCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"ContentCell"];
+
+    [self.contentCollectionView registerClass:[RecommandCollectionViewCell class] forCellWithReuseIdentifier:@"RecommandCell"];
+    [self.contentCollectionView registerClass:[MallViewCollectionViewCell class] forCellWithReuseIdentifier:@"MallCell"];
+    [self.contentCollectionView scrollToItemAtIndexPath:self.initialIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+
     [self.view addSubview:self.contentCollectionView];
 }
 
 - (void)setupIndicatorView {
-    CGFloat buttonWidth = self.view.bounds.size.width / self.titles.count;
-    self.indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 98, buttonWidth, 2)];
+    CGFloat buttonWidth = self.view.bounds.size.width / self.titles.count ;
+    self.indicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 128, buttonWidth, 2)];
     self.indicatorView.backgroundColor = [UIColor blackColor];
+    [self updateIndicatorViewForIndex: 3];
     [self.view addSubview:self.indicatorView];
 }
 
@@ -93,19 +116,16 @@
         
         return cell;
     } else {
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ContentCell" forIndexPath:indexPath];
-        
-        UILabel *label = (UILabel *)[cell viewWithTag:100];
-        if (!label) {
-            label = [[UILabel alloc] initWithFrame:cell.contentView.bounds];
-            label.textAlignment = NSTextAlignmentCenter;
-            label.textColor = [UIColor blackColor];
-            label.tag = 100;
-            [cell.contentView addSubview:label];
+        if (indexPath.item % 2 == 0) {
+            MallViewCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MallCell" forIndexPath:indexPath];
+            
+            return cell;
+        } else {
+            RecommandCollectionViewCell *rcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RecommandCell" forIndexPath:indexPath];
+            NSArray<NSURL *> *videoURLs = self.videoURLGroups[indexPath.item];
+            [rcell configureWithVideoURLs:videoURLs];
+            return rcell;
         }
-        label.text = [NSString stringWithFormat:@"Page %ld", indexPath.item + 1];
-        
-        return cell;
     }
 }
 
@@ -123,6 +143,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == self.buttonCollectionView) {
+        
         [self.contentCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
         [self updateIndicatorViewForIndex:indexPath.item];
     }
@@ -154,9 +175,17 @@
 
 - (void)updateIndicatorViewForIndex:(NSInteger)index {
     CGFloat buttonWidth = self.view.bounds.size.width / self.titles.count;
-    [UIView animateWithDuration:0.25 animations:^{
-        self.indicatorView.frame = CGRectMake(index * buttonWidth, self.indicatorView.frame.origin.y, buttonWidth, self.indicatorView.frame.size.height);
-    }];
+    CGFloat newX = index * buttonWidth;
+
+        // 获取指示器的当前frame
+        CGRect currentFrame = self.indicatorView.frame;
+
+        [UIView animateWithDuration:0.25 animations:^{
+            CGRect updatedFrame = currentFrame;
+            updatedFrame.origin.x = newX;
+            updatedFrame.size.width = buttonWidth;
+            self.indicatorView.frame = updatedFrame;
+        }];
 }
 
 @end
