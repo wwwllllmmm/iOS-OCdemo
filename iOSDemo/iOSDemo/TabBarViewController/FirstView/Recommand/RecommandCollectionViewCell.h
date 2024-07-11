@@ -10,8 +10,7 @@
 
 @interface RecommandCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UITableView *recommandTableView;
 
-- (void)configureWithVideoURLs:(NSArray<NSURL *> *)videoURLs;
 
 @end

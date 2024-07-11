@@ -7,12 +7,13 @@
 //
 
 #import "RecommandCollectionViewCell.h"
-#import "VideoCollectionViewCell.h"
+#import "VideoTableViewCell.h"
 
-@interface RecommandCollectionViewCell () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface RecommandCollectionViewCell () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray<NSURL *> *videoURLs;
-@property (nonatomic, strong) NSIndexPath *currentPlayingIndexPath;
+
 @end
 
 @implementation RecommandCollectionViewCell
@@ -20,67 +21,28 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
         if (self) {
-            UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-            layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-            layout.minimumLineSpacing = 0;
-            layout.minimumInteritemSpacing = 0;
-
-            self.collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:layout];
-            self.collectionView.dataSource = self;
-            self.collectionView.delegate = self;
-            self.collectionView.pagingEnabled = YES;
-            self.collectionView.showsVerticalScrollIndicator = NO;
-            [self.collectionView registerClass:[VideoCollectionViewCell class] forCellWithReuseIdentifier:@"VideoCollectionViewCell"];
-            self.collectionView.backgroundColor = [UIColor blackColor];
-
-            [self.contentView addSubview:self.collectionView];
+            self.recommandTableView = [[UITableView alloc] initWithFrame:self.contentView.bounds style:UITableViewStylePlain];
+            self.recommandTableView.dataSource = self;
+            self.recommandTableView.delegate = self;
+            [self.contentView addSubview:self.recommandTableView];
+                    
+            [self.recommandTableView registerClass:[VideoTableViewCell class] forCellReuseIdentifier:@"VideoTableCell"];
         }
         return self;
 }
 
-- (void)configureWithVideoURLs:(NSArray<NSURL *> *)videoURLs {
-    self.videoURLs = videoURLs;
-    [self.collectionView reloadData];
-    [self.collectionView setContentOffset:CGPointZero animated:NO];
-    self.currentPlayingIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.videoURLs.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    VideoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"VideoCollectionViewCell" forIndexPath:indexPath];
-    NSURL *videoURL = self.videoURLs[indexPath.item];
-    [cell configureWithURL:videoURL];
-    if (!self.currentPlayingIndexPath || self.currentPlayingIndexPath.item == indexPath.item) {
-        [cell.player play];
-        self.currentPlayingIndexPath = indexPath;
-    }
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VideoTableCell" forIndexPath:indexPath];
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.contentView.bounds.size;
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSArray *visibleCells = [self.collectionView visibleCells];
-    if (visibleCells.count == 1) {
-        VideoCollectionViewCell *cell = (VideoCollectionViewCell *)visibleCells.firstObject;
-        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-        if (indexPath && indexPath.item != self.currentPlayingIndexPath.item) {
-            [cell.player play];
-            self.currentPlayingIndexPath = indexPath;
-        }
-    }
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    if (self.currentPlayingIndexPath) {
-        VideoCollectionViewCell *currentCell = (VideoCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.currentPlayingIndexPath];
-        [currentCell.player pause];
-    }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 200; // 设置cell的高度
 }
 
 @end
+
